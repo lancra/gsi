@@ -2,5 +2,8 @@ namespace GitStatusInteractive.Dev.Targets;
 
 internal sealed class DefaultTarget : ITarget
 {
-    public void Setup(Bullseye.Targets targets) => targets.Add("default", () => { });
+    public void Setup(Bullseye.Targets targets)
+        => targets.Add(
+            "default",
+            dependsOn: [BuildTargets.Build]);
 }
