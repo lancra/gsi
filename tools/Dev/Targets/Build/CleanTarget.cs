@@ -9,6 +9,22 @@ internal sealed class CleanTarget : ITarget
             Execute);
 
     private static async Task Execute()
-        => await DotnetCli.Run("clean")
-        .ConfigureAwait(false);
+    {
+        await DotnetCli.Run("clean")
+            .ConfigureAwait(false);
+
+        if (Directory.Exists(ArtifactPaths.TestResults))
+        {
+            string[] removeTestResultsArguments =
+            [
+                "-Command Remove-Item",
+                $"-Path {ArtifactPaths.TestResults}",
+                "-Recurse",
+                "-ErrorAction SilentlyContinue",
+            ];
+
+            await PowerShell.Run(removeTestResultsArguments)
+                .ConfigureAwait(false);
+        }
+    }
 }
