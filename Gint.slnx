@@ -17,4 +17,7 @@
     <File Path="tests/TestingSuppressions.cs" />
     <File Path="tests/xunit.runner.json" />
   </Folder>
+  <Folder Name="/tools/">
+    <Project Path="tools/Dev/Gint.Dev.csproj" />
+  </Folder>
 </Solution>
