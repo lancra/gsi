@@ -3,7 +3,7 @@ using Ardalis.SmartEnum;
 namespace GitStatusInteractive.Core;
 
 /// <summary>
-/// Represents the indicator assigned for the changes in an area and file.
+/// Represents the indicator assigned for the changes in a file.
 /// </summary>
 public class ChangeIndicator : SmartEnum<ChangeIndicator, char>
 {
@@ -25,7 +25,13 @@ public class ChangeIndicator : SmartEnum<ChangeIndicator, char>
     /// <summary>
     /// Specifies that the file is ignored.
     /// </summary>
-    public static readonly ChangeIndicator Ignored = new("Ignored", '!', stagingAreaColor: ChangeIndicatorColor.Red);
+    public static readonly ChangeIndicator Ignored = new(
+        "Ignored",
+        '!',
+        colorOverrides: new Dictionary<ChangeArea, ChangeIndicatorColor>
+        {
+            [ChangeArea.Staging] = ChangeIndicatorColor.Red,
+        });
 
     /// <summary>
     /// Specifies that the file is modified.
@@ -45,12 +51,24 @@ public class ChangeIndicator : SmartEnum<ChangeIndicator, char>
     /// <summary>
     /// Specifies that the file is modified with unresolved merge conflicts.
     /// </summary>
-    public static readonly ChangeIndicator Unmerged = new("Unmerged", 'U', stagingAreaColor: ChangeIndicatorColor.Red);
+    public static readonly ChangeIndicator Unmerged = new(
+        "Unmerged",
+        'U',
+        colorOverrides: new Dictionary<ChangeArea, ChangeIndicatorColor>
+        {
+            [ChangeArea.Staging] = ChangeIndicatorColor.Red,
+        });
 
     /// <summary>
     /// Specifies that the file is changed in an unknown way.
     /// </summary>
-    public static readonly ChangeIndicator Unknown = new("Unknown", 'X', stagingAreaColor: ChangeIndicatorColor.Red);
+    public static readonly ChangeIndicator Unknown = new(
+        "Unknown",
+        'X',
+        colorOverrides: new Dictionary<ChangeArea, ChangeIndicatorColor>
+        {
+            [ChangeArea.Staging] = ChangeIndicatorColor.Red,
+        });
 
     /// <summary>
     /// Specifies that the file is unmodified within an area.
@@ -60,17 +78,23 @@ public class ChangeIndicator : SmartEnum<ChangeIndicator, char>
     /// <summary>
     /// Specifies that the file is not tracked.
     /// </summary>
-    public static readonly ChangeIndicator Untracked = new("Untracked", '?', stagingAreaColor: ChangeIndicatorColor.Red);
+    public static readonly ChangeIndicator Untracked = new(
+        "Untracked",
+        '?',
+        colorOverrides: new Dictionary<ChangeArea, ChangeIndicatorColor>
+        {
+            [ChangeArea.Staging] = ChangeIndicatorColor.Red,
+        });
 
     private ChangeIndicator(
         string name,
         char value,
-        ChangeIndicatorColor? stagingAreaColor = default)
+        Dictionary<ChangeArea, ChangeIndicatorColor>? colorOverrides = default)
         : base(name, value)
-        => StagingAreaColor = stagingAreaColor;
+        => ColorOverrides = colorOverrides ?? [];
 
     /// <summary>
-    /// Gets the optional color override for an area.
+    /// Gets the color overrides by area.
     /// </summary>
-    internal ChangeIndicatorColor? StagingAreaColor { get; }
+    public IReadOnlyDictionary<ChangeArea, ChangeIndicatorColor> ColorOverrides { get; }
 }

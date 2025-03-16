@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "GitStatusInteractive.Cli": {
+      "commandName": "Project",
+      "commandLineArgs": "run",
+      "workingDirectory": "D:\\projects\\gsi"
+    }
+  }
+}

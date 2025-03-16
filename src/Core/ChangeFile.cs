@@ -5,22 +5,16 @@ namespace GitStatusInteractive.Core;
 /// </summary>
 public record ChangeFile
 {
-    internal ChangeFile(ChangeIndicator stagingIndicator, ChangeIndicator workingIndicator, string path)
+    internal ChangeFile(IReadOnlyCollection<ChangeAreaIndicator> indicators, string path)
     {
-        StagingIndicator = stagingIndicator;
-        WorkingIndicator = workingIndicator;
+        Indicators = indicators;
         Path = path;
     }
 
     /// <summary>
-    /// Gets the status indicator shown for the Staging area.
+    /// Gets the status indicators across areas.
     /// </summary>
-    public ChangeIndicator StagingIndicator { get; init; }
-
-    /// <summary>
-    /// Gets the status indicator shown for the Working area.
-    /// </summary>
-    public ChangeIndicator WorkingIndicator { get; init; }
+    public IReadOnlyCollection<ChangeAreaIndicator> Indicators { get; init; }
 
     /// <summary>
     /// Gets the path of the file.
