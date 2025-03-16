@@ -5,4 +5,8 @@
     <InternalsVisibleTo Include="GitStatusInteractive.Core.Facts" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="SimpleExec" />
+  </ItemGroup>
+
 </Project>
