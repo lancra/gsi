@@ -6,6 +6,7 @@
 
   <ItemGroup Label="Infrastructure">
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.3" />
+    <PackageVersion Include="Ardalis.SmartEnum" Version="8.2.0" />
   </ItemGroup>
 
   <ItemGroup Label="Static Analysis">
